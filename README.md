@@ -99,3 +99,49 @@ Use `gcc` (or any standard C compiler) and link the math library (`-lm`).
 ```bash
 # Example: Compile the 3-atom counter for Omega phase
 gcc -o count_omega_3 cluster_identify/omega/cluster_identify_3atom_omega.c -lm
+```
+
+
+## 3. Configuration Multiplicity Calculator ($\alpha_l$ Calculator)
+
+These programs calculate the multiplicity **$\alpha_l(A)$**, which represents the number of equivalent atomic arrangements for a specific configuration $l$ on a given cluster $A$.
+
+### Theoretical Background
+
+This value appears in **Equation (18)** of the referenced paper and is crucial for calculating the entropy factor $s(A)$.
+
+$$
+s(A) = k_B \sum_{l} \alpha_{l}(A) x_{l}(A) \ln x_{l}(A)
+$$
+
+* **$\alpha_l(A)$**: The number of arrangements equivalent to arrangement $l$ under the symmetry operations of the cluster, $\mathcal{N}_A(G)$.
+* **Orbits**: The program classifies all $2^N$ possible binary configurations (Ti/Mo) into "orbits" (groups of equivalent configurations). The size of each orbit corresponds to $\alpha_l$.
+* **Verification**: This tool automates the calculation of values such as those shown in **Figure 7** for the $\beta_5$ cluster.
+
+### Included Tools
+
+These tools take a specific set of atom indices (defining a cluster) as input and output the multiplicity for all unique configurations.
+
+* **BCC Phase** ($O_h$ Symmetry)
+    * Source: `beta_a_l.c`
+    * Compile: `gcc -o beta_a_l beta_a_l.c -lm`
+* **HCP Phase** ($D_{6h}$ Symmetry)
+    * Source: `alpha_a_l.c`
+    * Compile: `gcc -o alpha_a_l alpha_a_l.c -lm`
+* **Omega Phase** ($D_{6h}$ Symmetry)
+    * Source: `omega_a_l.c`
+    * Compile: `gcc -o omega_a_l omega_a_l.c -lm`
+
+### Usage
+
+1.  **Compile** the program using `gcc` with the math library linked (`-lm`).
+2.  **Run** the executable.
+3.  **Input** the number of atoms in the cluster.
+4.  **Input** the specific atom indices defining the cluster (based on the reference atomic positions in the code).
+
+#### Example: Calculating $\alpha_l$ for $\beta_5$ cluster (Figure 7 in paper) using `alpha_bcc`
+
+**Input:**
+```text
+Atoms: 3
+Atom Indices: 1, 2, 5
