@@ -12,17 +12,30 @@ The outputs of these programs directly correspond to the variables required for 
 
 ### 1. Symmetry of Cluster A ($|\mathcal{N}_{A}(G)|$):
 
-The program outputs "Total valid operations," which corresponds to $|\mathcal{N}_{A}(G)|$. This value is used to calculate the multiplicity $\mu_A$ of the cluster (Eq. 15):
+The program outputs "Total valid operations," which corresponds to 
+$|\mathcal{N}_{A}(G)|$
+. 
+This value is used to calculate the multiplicity 
+$\mu_A$
+of the cluster (Eq. 15):
 
 $$
 \mu_{A} = \frac{|\Gamma_{\phi}|}{|\mathcal{N}_{A}(G)|}
 $$
 
-(Where $|\Gamma_{\phi}|$ is `NUM_OPE`, i.e., 24 or 48 depending on the phase).
+(Where 
+$|\Gamma_{\phi}|$
+is `NUM_OPE`, i.e., 24 or 48 depending on the phase).
 
-### 2. Intersection Group ($|\mathcal{N}_{A}(G) \cap \mathcal{N}_{A'}(G)|$):
+### 2. Intersection Group
 
-The "Re-check" function counts the number of operations that remain valid when the rotation center is shifted to a subcluster $A'$. This count corresponds to the order of the intersection group $|\mathcal{N}_{A}(G) \cap \mathcal{N}_{A'}(G)|$. This is used to calculate the number of subclusters $M(A', A)$ (Eq. 17):
+The "Re-check" function counts the number of operations that remain valid when the rotation center is shifted to a subcluster $A'$. This corresponds to the order of the intersection group:
+
+$$
+|\mathcal{N}_{A}(G) \cap \mathcal{N}_{A'}(G)|
+$$
+
+This is used to calculate the number of subclusters $M(A', A)$ (Eq. 17):
 
 $$
 M(A', A) = \sum \frac{|\mathcal{N}_{A}(G)|}{|\mathcal{N}_{A}(G) \cap \mathcal{N}_{A'}(G)|}
