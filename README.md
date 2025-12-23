@@ -43,16 +43,16 @@ $$
 Compile using `gcc` linking the math library (`-lm`).
 
 * **BCC Phase** ($O_h$, 48 Ops, 9 Ref Atoms)
-    * Source: `M_bcc_output.c`
-    * Compile: `gcc -o calc_bcc M_bcc_output.c -lm`
+    * Source: `M_beta_output.c`
+    * Compile: `gcc -o calc_beta Symmetry-Analysis/M_beta_output.c -lm`
 
 * **HCP Phase** ($D_{6h}$, 24 Ops, 18 Ref Atoms)
-    * Source: `M_hcp_output.c`
-    * Compile: `gcc -o calc_hcp M_hcp_output.c -lm`
+    * Source: `M_alpha_output.c`
+    * Compile: `gcc -o calc_alpha Symmetry-Analysis/M_alpha_output.c -lm`
 
 * **Omega Phase** (24 Ops, 22 Ref Atoms)
-    * Source: `M_w_output.c`
-    * Compile: `gcc -o calc_w M_w_output.c -lm`
+    * Source: `M_omega_output.c`
+    * Compile: `gcc -o calc_omega Symmetry-Analysis/M_omega_output.c -lm`
 
 ---
 
@@ -98,4 +98,4 @@ Use `gcc` (or any standard C compiler) and link the math library (`-lm`).
 
 ```bash
 # Example: Compile the 3-atom counter for Omega phase
-gcc -o count_omega_3 cluster_identify_3atom_omega.c -lm
+gcc -o count_omega_3 cluster_identify/omega/cluster_identify_3atom_omega.c -lm
