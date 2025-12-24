@@ -1,16 +1,23 @@
 # Ti-Mo Phase Diagram Analysis Tools
 
-This repository contains a suite of C programs developed for analyzing the crystal symmetry and calculating cluster configurations of Titanium-Molybdenum (Ti-Mo) alloys using Density Functional Theory (DFT) and the Cluster Variation Method (CVM).
+This repository contains the supplemental materials for the paper:
 
-This software supports the research presented in the paper:
+**"Calculation of the Ti–Mo phase diagram using density functional theory and crystal symmetry"** by Y. Ikeda and A. Ishii.
 
-**"Calculation of the Ti–Mo phase diagram using density functional theory and crystal symmetry"**
+**Overview** These codes are developed for the calculation of cluster configurations and symmetry properties in Ti-Mo alloys using Density Functional Theory (DFT) and the Cluster Variation Method (CVM). The programs detect user-specified clusters within an input atomic model and output detailed cluster information, including the specific atomic arrangement and the weighting based on the number of unit cells sharing the cluster.
 
-## Overview
+**Usage** A **POSCAR**-formatted atomic model is required as input for the configuration counters. Additionally, the lattice constant and the indices of the atoms constituting the cluster must be specified via command-line arguments.
 
-This repository consists of two main sets of tools:
-1. **Symmetry Analysis Suite**: Calculates invariant symmetry operations for atomic clusters.
-2. **Cluster Configuration Counter**: Calculates the frequency of specific atomic cluster configurations ($n_l$) in supercells.
+**Disclaimer** Please note that these source codes were originally developed for personal research use and may not be fully optimized for user-friendliness. Please feel free to contact the authors if you have any questions.
+
+---
+
+## Repository Contents
+
+This repository consists of three main sets of tools:
+1.  **Symmetry Analysis Suite**: Calculates invariant symmetry operations for atomic clusters.
+2.  **Cluster Configuration Counter**: Calculates the frequency of specific atomic cluster configurations ($n_l$) in supercells.
+3.  **Configuration Multiplicity Calculator**: Calculates the multiplicity ($\alpha_l$) of atomic arrangements.
 
 All tools use a consistent floating-point tolerance (`EPS 1e-2`) and require the standard math library (`-lm`) for compilation.
 
@@ -99,49 +106,3 @@ Use `gcc` (or any standard C compiler) and link the math library (`-lm`).
 ```bash
 # Example: Compile the 3-atom counter for Omega phase
 gcc -o count_omega_3 cluster_identify/omega/cluster_identify_3atom_omega.c -lm
-```
-
-
-## 3. Configuration Multiplicity Calculator ($\alpha_l$ Calculator)
-
-These programs calculate the multiplicity **$\alpha_l(A)$**, which represents the number of equivalent atomic arrangements for a specific configuration $l$ on a given cluster $A$.
-
-### Theoretical Background
-
-This value appears in **Equation (18)** of the referenced paper and is crucial for calculating the entropy factor $s(A)$.
-
-$$
-s(A) = k_B \sum_{l} \alpha_{l}(A) x_{l}(A) \ln x_{l}(A)
-$$
-
-* **$\alpha_l(A)$**: The number of arrangements equivalent to arrangement $l$ under the symmetry operations of the cluster, $\mathcal{N}_A(G)$.
-* **Orbits**: The program classifies all $2^N$ possible binary configurations (Ti/Mo) into "orbits" (groups of equivalent configurations). The size of each orbit corresponds to $\alpha_l$.
-* **Verification**: This tool automates the calculation of values such as those shown in **Figure 7** for the $\beta_5$ cluster.
-
-### Included Tools
-
-These tools take a specific set of atom indices (defining a cluster) as input and output the multiplicity for all unique configurations.
-
-* **BCC Phase** ($O_h$ Symmetry)
-    * Source: `beta_a_l.c`
-    * Compile: `gcc -o beta_a_l beta_a_l.c -lm`
-* **HCP Phase** ($D_{6h}$ Symmetry)
-    * Source: `alpha_a_l.c`
-    * Compile: `gcc -o alpha_a_l alpha_a_l.c -lm`
-* **Omega Phase** ($D_{6h}$ Symmetry)
-    * Source: `omega_a_l.c`
-    * Compile: `gcc -o omega_a_l omega_a_l.c -lm`
-
-### Usage
-
-1.  **Compile** the program using `gcc` with the math library linked (`-lm`).
-2.  **Run** the executable.
-3.  **Input** the number of atoms in the cluster.
-4.  **Input** the specific atom indices defining the cluster (based on the reference atomic positions in the code).
-
-#### Example: Calculating $\alpha_l$ for $\beta_5$ cluster (Figure 7 in paper) using `alpha_bcc`
-
-**Input:**
-```text
-Atoms: 3
-Atom Indices: 1, 2, 5
